@@ -10,26 +10,26 @@ Each agent has a name, a specialization, and a defined scope. When you activate 
 
 ### Core Agents (BMad Method Module)
 
-| Agent | Persona Name | Who Uses It (Human) | What It Does | Starter Prompt Samples |
-|---|---|---|---|---|
-| **PM Agent** | John | Product Manager | Drafts PRDs, structures acceptance criteria, validates user stories against business goals | [PM Agent prompts](prompts/pm-agent-prompts.md) — Create PRD, convert Jira Epics, strengthen acceptance criteria, scope negotiation |
-| **Architect Agent** | Winston | Architect / Tech Lead | Generates architecture docs, validates tech decisions, defines component boundaries and security guardrails | [Architect Agent prompts](prompts/architect-agent-prompts.md) — Create architecture from PRD, ADRs, review proposals, security checklists |
-| **Developer Agent** | Amelia | Developer | Implements stories against specs, generates code that respects architecture constraints, runs within validated guardrails | [Developer Agent prompts](prompts/developer-agent-prompts.md) — Implement from spec, generate tests, code review against specs, bug fixes |
-| **SM Agent** | — | Scrum Master | Sprint planning, retrospectives, velocity tracking, workflow coordination | [SM Agent prompts](prompts/sm-agent-prompts.md) — Sprint planning, mid-sprint status, retrospectives, scope changes |
-| **UX Designer Agent** | — | UI/UX Designer | Creates UX specs, validates design system compliance, defines component contracts | [UX Agent prompts](prompts/ux-agent-prompts.md) — UX spec from PRD, error states, component contracts, accessibility review |
-| **Analyst Agent** | — | Business Analyst / PM | Conducts domain research, market research, technical research, generates project context | [Analyst Agent prompts](prompts/analyst-agent-prompts.md) — Domain research, competitive analysis, tech comparisons, stakeholder prep |
+| Agent | Persona Name | Who Uses It (Human) | What It Does | Artifact Delivered | Starter Prompt Samples |
+|---|---|---|---|---|---|
+| **PM Agent** | John | Product Manager | Drafts PRDs, structures acceptance criteria, validates user stories against business goals | `PRD.md`, `product-brief.md` | [PM Agent prompts](prompts/pm-agent-prompts.md) |
+| **Architect Agent** | Winston | Architect / Tech Lead | Generates architecture docs, validates tech decisions, defines component boundaries and security guardrails | `architecture.md` (with ADRs) | [Architect Agent prompts](prompts/architect-agent-prompts.md) |
+| **Developer Agent** | Amelia | Developer | Implements stories against specs, generates code that respects architecture constraints | Working code + tests | [Developer Agent prompts](prompts/developer-agent-prompts.md) |
+| **SM Agent** | — | Scrum Master | Sprint planning, retrospectives, velocity tracking, workflow coordination | `sprint-status.yaml`, retro notes | [SM Agent prompts](prompts/sm-agent-prompts.md) |
+| **UX Designer Agent** | — | UI/UX Designer | Creates UX specs, validates design system compliance, defines component contracts | `ux-spec.md`, component contracts | [UX Agent prompts](prompts/ux-agent-prompts.md) |
+| **Analyst Agent** | — | Business Analyst / PM | Conducts domain research, market research, technical research, generates project context | Research reports, `project-context.md` | [Analyst Agent prompts](prompts/analyst-agent-prompts.md) |
 
 ### Additional Agents (Extended Modules)
 
-| Agent | Module | What It Does |
-|---|---|---|
-| **Test Architect** (TEA) | Test Architecture Module | Creates risk-based testing strategies, generates test plans from acceptance criteria |
-| **Tech Writer** | BMM | Generates documentation from code and specs |
-| **Quick Flow Solo Dev** | BMM | Streamlined agent for small, well-understood tasks — combines planning + implementation in one flow |
-| **Brainstorming Coach** (Carson) | Creative Intelligence Suite | Facilitates structured brainstorming sessions |
-| **Creative Problem Solver** | Creative Intelligence Suite | Applies lateral thinking frameworks to stuck problems |
-| **Design Thinking Coach** | Creative Intelligence Suite | Guides teams through empathize → define → ideate → prototype → test |
-| **Innovation Strategist** | Creative Intelligence Suite | Evaluates ideas against market viability and technical feasibility |
+| Agent | Module | What It Does | Artifact Delivered | Starter Prompt Samples |
+|---|---|---|---|---|
+| **Test Architect** (TEA) | Test Architecture Module | Creates risk-based testing strategies, generates test plans from acceptance criteria | `test-strategy.md`, `test-plan-{story}.md`, e2e test files, `release-quality-gate.md` | [Test Architect prompts](prompts/test-architect-agent-prompts.md) |
+| **Tech Writer** | BMM | Generates API docs, runbooks, and user-facing help articles from code and specs | `docs/api/*.md`, `docs/runbooks/*.md`, `docs/help/*.md` | [Tech Writer prompts](prompts/tech-writer-agent-prompts.md) |
+| **Quick Flow Solo Dev** | BMM | Streamlined agent for small, well-understood tasks — combines planning + implementation in one flow | `spec-*.md` + working code + tests | [Quick Flow prompts](prompts/quick-flow-solo-dev-prompts.md) |
+| **Brainstorming Coach** (Carson) | Creative Intelligence Suite | Facilitates structured brainstorming sessions with guided ideation | `brainstorming-report.md` | [Creative Suite prompts](prompts/creative-suite-agent-prompts.md#brainstorming-coach-carson) |
+| **Creative Problem Solver** | Creative Intelligence Suite | Applies lateral thinking frameworks to stuck problems | `creative-solutions-report.md` | [Creative Suite prompts](prompts/creative-suite-agent-prompts.md#creative-problem-solver) |
+| **Design Thinking Coach** | Creative Intelligence Suite | Guides teams through empathize → define → ideate → prototype → test | `design-thinking-report.md` (empathy maps, HMW statements, prototypes, test scripts) | [Creative Suite prompts](prompts/creative-suite-agent-prompts.md#design-thinking-coach) |
+| **Innovation Strategist** | Creative Intelligence Suite | Evaluates ideas against market viability and technical feasibility | `innovation-assessment-{topic}.md` (GO / WAIT / PASS) | [Creative Suite prompts](prompts/creative-suite-agent-prompts.md#innovation-strategist) |
 
 ---
 
@@ -135,23 +135,9 @@ Party Mode (`bmad-party-mode`) loads **multiple AI agent personas into a single 
 
 ## Summary: The Full Picture
 
-```
-Phase 1 (Optional)          Phase 2              Phase 3                Phase 4
-Discovery & Analysis   →    Planning        →    Solutioning       →   Implementation
+![BMAD Method: Spec-Driven AI Development Workflow](bmad/BMAD_Method.png)
 
-Brainstorming               Create PRD           Create Architecture    Sprint Planning
-Domain Research             Create UX Design     Create Epics/Stories   Dev Story
-Market Research                                  Readiness Check        Code Review
-Technical Research                               Generate Context       Course Correct
-Product Brief                                                           Sprint Status
-PR/FAQ                                                                  Retrospective
-
-         ↑                       ↑                     ↑                     ↑
-    Analyst Agent           PM Agent +            Architect Agent +     Developer Agent +
-                           UX Agent               PM/PO + Dev Agent     QA Agent
-
-                    ← Party Mode available at any phase for multi-perspective decisions →
-```
+The diagram shows the complete flow: **who contributes at each phase** (humans + AI agents), **what artifacts are delivered**, and **how each phase's output feeds the next**. The Implementation Readiness Check gate between Solutioning and Implementation ensures nothing enters development without validated specs.
 
 ---
 

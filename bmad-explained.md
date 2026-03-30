@@ -63,6 +63,8 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 
 ## The Workflow: 4 Phases Mapped to Your Sprint Cycle
 
+![BMAD Method: Spec-Driven AI Development Workflow](bmad/BMAD_Method.png)
+
 | BMAD Phase | Sprint Activity | Key Output | Who Leads |
 |---|---|---|---|
 | **1. Analysis** | Sprint Planning / Backlog Refinement | PRD, validated user stories, personas | Product Manager + Business Analyst |
