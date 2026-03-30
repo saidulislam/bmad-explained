@@ -31,7 +31,7 @@ BMAD enforces this through a chain of three artifacts, each created by the right
 |---|---|---|---|---|
 | 1 | **PRD** (Product Requirements Document) | **Product Manager** (PM Agent) | *What* are we building, *why*, and *what does "done" look like?* Includes business acceptance criteria for every requirement. | Without it, the AI guesses at requirements. With it, the agent knows exactly what's in scope, what's out, and how success is measured — **by the business, not the developer.** |
 | 2 | **Architecture Doc** | **Architect** (Architect Agent) | *How* does it fit into our system? What tech stack, components, security patterns, and boundaries? | Without it, the AI makes its own architecture choices — maybe it picks MD5 when you require bcrypt, or builds a monolith when you need microservices. |
-| 3 | **Technical Spec / Story** | **Senior Developer** (Developer Agent) | *Exactly how* do we implement the PM's requirements? API contracts, data models, error responses — the technical translation of business acceptance criteria. | The developer defines *how* to build it, not *what's acceptable*. Acceptance criteria trace directly back to the PRD. **PM/PO signs off** that the spec faithfully represents their requirements before implementation begins. |
+| 3 | **Technical Spec / Story** | **Senior Developer + PM/PO** (co-authored) | *Exactly how* do we implement the PM's requirements? API contracts, data models, error responses — the technical translation of business acceptance criteria. | Co-created so the dev defines *how* to build it while the PM/PO ensures *what's acceptable* is never lost in translation. Neither side works in isolation. |
 
 **The handoff is non-negotiable:** PRD (with business acceptance criteria) feeds the Architecture Doc, Architecture Doc feeds the Technical Spec, PM/PO reviews the Technical Spec to confirm it represents their intent, and *only then* does the Developer Agent write code. No one grades their own homework.
 
@@ -67,7 +67,7 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 |---|---|---|---|
 | **1. Analysis** | Sprint Planning / Backlog Refinement | PRD, validated user stories, personas | Product Manager + Business Analyst |
 | **2. Planning** | Architecture & Design Sessions | Architecture doc, component boundaries, tech stack decisions | Architect + Engineering Leads |
-| **3. Solutioning** | Pre-sprint technical design | Technical specs (API contracts, data models) implementing PM-defined acceptance criteria; **PM/PO sign-off required** | Senior Devs + Architect + PM/PO review |
+| **3. Solutioning** | Pre-sprint technical design | Technical specs (API contracts, data models) co-authored with PM/PO to ensure business intent is preserved | Senior Devs + PM/PO + Architect |
 | **4. Implementation** | Sprint execution | Production-ready code, generated against specs with AI agents | Developers + QA |
 
 **How it fits:** Phases 1–3 front-load the thinking into **existing Scrum ceremonies** (refinement, planning, design spikes). Phase 4 is where developers use AI agents — but now those agents have the full spec context, not just a Jira title.

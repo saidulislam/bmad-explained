@@ -1,7 +1,7 @@
 # Technical Spec: AUTH-02 — User Login
 
-**Author:** Senior Developer (Developer Agent)
-**Reviewed by:** Architect (architecture compliance) + **PM/PO (acceptance criteria sign-off)**
+**Co-authored by:** Senior Developer (Developer Agent) + **PM/PO** (acceptance criteria ownership)
+**Reviewed by:** Architect (architecture compliance)
 **Input:** [PRD](01-prd-user-auth.md) → [Architecture Doc](02-architecture-user-auth.md)
 **Story:** As a returning user, I want to log in with my email and password so I can access my dashboard.
 **Status:** Ready for Implementation
