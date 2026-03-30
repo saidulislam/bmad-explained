@@ -82,7 +82,7 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 
 | Role | BMAD Superpower |
 |---|---|
-| **Product Manager** | Defines the PRD **and owns all acceptance criteria** — the PM decides what "done" looks like, not the developer. Reviews Technical Specs before implementation to confirm intent is preserved |
+| **Product Manager** | Your Epic + Stories *become* the PRD — same work, structured for AI speed. You own acceptance criteria, co-author Tech Specs in a 30-min session (replacing days of Slack clarifications), and watch implementation compress from weeks to days |
 | **Architect** | Uses the **Architect Agent** persona to set technical guardrails, define component boundaries, and validate architecture *before a single line of code is written* |
 | **Engineering Lead** | Reviews structured specs instead of reviewing speculative AI output — shift-left quality |
 | **Developer** | Feeds validated specs + architecture docs into Claude CLI; gets code that respects the system design, not just the immediate prompt |
@@ -111,6 +111,50 @@ Here's how the synergy works:
 - **IDE integration** — Works in **VS Code** and **IntelliJ** via Claude CLI extensions, meeting developers where they already work.
 
 > **The result:** Opus 4.6 generates code that is traceable to specs, constrained by architecture, and verifiable against acceptance criteria — not hallucinated from a one-line prompt.
+
+---
+
+## "But This Is More Work for Product" — Addressing the Elephant in the Room
+
+**It's not.** Here's why.
+
+### What Product Does Today (Without BMAD)
+
+1. PM creates an **Epic** in Jira
+2. PM writes **User Stories** with business rules and acceptance criteria
+3. Tech team creates **tech-specific stories** from those
+4. Dev starts coding...
+5. Dev hits ambiguity → Slack message to PM → PM responds hours later → dev context-switches
+6. Repeat step 5 three to five more times per story
+7. Code review reveals a misunderstood requirement → rework
+8. Sprint review: "That's not what I meant" → card rolls to next sprint
+9. UAT finds edge cases nobody discussed → more rework
+
+**The real cycle time killer isn't missing specs — it's the back-and-forth that happens because the specs weren't clear enough for the person (or AI) writing the code.**
+
+### What Product Does With BMAD
+
+1. PM creates an **Epic** in Jira *(same as today)*
+2. PM writes **User Stories with acceptance criteria** in a structured PRD template *(same work, better format — the AI PM Agent can even help draft it)*
+3. PM sits with Senior Dev for a **30-minute Tech Spec co-authoring session** — Dev translates business criteria into technical implementation, PM confirms intent in real-time *(this replaces days of async Slack back-and-forth)*
+4. AI agent receives PRD + Architecture Doc + Tech Spec → generates implementation
+5. **No ambiguity. No "what did you mean?" No rework. No rolled cards.**
+
+### The Math That Matters to Product
+
+| Metric | Without BMAD | With BMAD |
+|---|---|---|
+| Clarification loops per story | 3–5 async rounds (hours to days each) | 1 co-authoring session (30 min) |
+| "That's not what I meant" in sprint review | Common | Rare — PM confirmed intent in the Tech Spec |
+| Cards rolled to next sprint due to rework | Frequent | Minimal — acceptance criteria verified before code gen |
+| Implementation time (AI-assisted) | Fast but unpredictable — rework erases the speed | Fast *and* right the first time |
+| **Epic cycle time** | **Weeks** (coding is fast, rework is slow) | **Days** (upfront clarity eliminates rework) |
+
+### The Key Insight for Product
+
+> **BMAD doesn't add work. It moves 30 minutes of your time from "answering Slack questions mid-sprint" to "one focused co-authoring session before sprint." The result: the AI builds it right the first time, and your Epic ships days faster.**
+
+The PM's existing artifacts (Epics, Stories, acceptance criteria) *are* the BMAD inputs — just structured in a way that an AI agent can execute against without guessing. The PM Agent can even help generate the PRD from your existing Jira stories.
 
 ---
 
