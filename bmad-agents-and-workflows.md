@@ -115,13 +115,16 @@ Party Mode (`bmad-party-mode`) loads **multiple AI agent personas into a single 
 
 ### When to Use Party Mode
 
-| Scenario | Why Party Mode Helps |
-|---|---|
-| **Complex architecture decisions** | Get engineering, product, and QA perspectives simultaneously instead of scheduling 3 separate meetings |
-| **Sprint planning** | PM prioritizes, Architect estimates complexity, Dev flags dependencies — all in one conversation |
-| **Incident post-mortems** | Analyze from technical, process, and product angles at once |
-| **Design reviews** | UX, Dev, and Architect evaluate feasibility, usability, and maintainability together |
-| **Tradeoff discussions** | When there's no obvious right answer and you need multiple viewpoints to decide |
+| Scenario | Why Party Mode Helps | Starter Prompt |
+|---|---|---|
+| **Architecture decisions** | Get engineering, product, and QA perspectives simultaneously instead of scheduling 3 separate meetings | [Architecture Decision prompt](prompts/party-mode-prompts.md#scenario-1-architecture-decision--before-writing-the-architecture-doc) |
+| **Sprint planning** | PM prioritizes, Architect estimates complexity, Dev flags dependencies — all in one conversation | [Sprint Planning prompt](prompts/party-mode-prompts.md#scenario-2-sprint-planning--prioritizing-and-estimating-stories) |
+| **Design reviews** | UX, Dev, and Architect evaluate feasibility, usability, and maintainability together | [Design Review prompt](prompts/party-mode-prompts.md#scenario-3-design-review--validating-ux-before-development) |
+| **Production incidents** | Diagnose, assess blast radius, plan fix, and draft comms — all in one triage session | [Incident Triage prompt](prompts/party-mode-prompts.md#scenario-4-production-incident-triage) |
+| **Sprint retrospectives** | Analyze from technical, process, and product angles at once with concrete action items | [Retrospective prompt](prompts/party-mode-prompts.md#scenario-5-retrospective--what-went-wrong-and-what-to-improve) |
+| **Feature feasibility** | Quick GO/NO-GO assessment before committing to stakeholders | [Feasibility Check prompt](prompts/party-mode-prompts.md#scenario-6-feature-feasibility--before-committing-to-stakeholders) |
+
+**Full Party Mode guide with all 6 scenario prompts:** [`prompts/party-mode-prompts.md`](prompts/party-mode-prompts.md)
 
 ### What Party Mode Is NOT
 
