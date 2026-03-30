@@ -150,17 +150,22 @@ Here's how the synergy works:
 
 ### The Math That Matters to Product
 
-| Metric | Without BMAD | With BMAD |
-|---|---|---|
-| Clarification loops per story | 3–5 async rounds (hours to days each) | 1 co-authoring session (30 min) |
-| "That's not what I meant" in sprint review | Common | Rare — PM confirmed intent in the Tech Spec |
-| Cards rolled to next sprint due to rework | Frequent | Minimal — acceptance criteria verified before code gen |
-| Implementation time (AI-assisted) | Fast but unpredictable — rework erases the speed | Fast *and* significantly more correct due to spec constraints |
-| **Epic cycle time** | **Weeks** (coding is fast, rework is slow) | **Days** (upfront clarity significantly reduces rework) |
+**Important: BMAD does not change your sprint cadence.** A 2-week sprint is still 2 weeks. What changes is the **throughput inside each sprint** and how many sprints an Epic takes to complete.
+
+| Metric | Without BMAD | With BMAD | Why |
+|---|---|---|---|
+| Clarification loops per story | 3–5 async rounds (hours to days each) | 1 co-authoring session (30 min) | Questions answered upfront, not mid-sprint |
+| "That's not what I meant" in sprint review | Common | Rare — PM confirmed intent in the Tech Spec | PM co-authored the spec, not just reviewed it |
+| **Story cycle time** (ready → done) | 3–5 days (coding + clarification + rework) | 1–2 days (AI generates against clear spec) | The AI agent isn't guessing — it has the spec |
+| **Stories completed per sprint** | 4–6 (rework eats capacity) | 6–10 (less rework = more throughput) | Time saved on back-and-forth becomes more delivered stories |
+| Sprint rollover rate | 20–40% of stories roll to next sprint | Under 10% | Specs are validated before implementation — fewer surprises |
+| **Epic cycle time** | 3–4 sprints / 6–8 weeks (stories roll, rework, re-scope) | 1–2 sprints / 2–4 weeks (fewer rolled cards, less rework) | **This is the number product teams care about** |
+
+**The sprint stays the same length. You just deliver more per sprint with less waste.** An Epic that used to span 3–4 sprints closes in 1–2 — not because the sprint is shorter, but because you're not losing capacity to rework and clarification loops.
 
 ### The Key Insight for Product
 
-> **BMAD doesn't add work. It moves 30 minutes of your time from "answering Slack questions mid-sprint" to "one focused co-authoring session before sprint." The result: the AI builds it right the first time, and your Epic ships days faster.**
+> **BMAD doesn't add work or change your sprint cadence. It moves 30 minutes of your time from "answering Slack questions mid-sprint" to "one focused co-authoring session before sprint." The result: higher throughput per sprint, fewer rolled cards, and Epics that close in half the sprints.**
 
 The PM's existing artifacts (Epics, Stories, acceptance criteria) *are* the BMAD inputs — just structured in a way that an AI agent can execute against without guessing. The PM Agent can even help generate the PRD from your existing Jira stories.
 
