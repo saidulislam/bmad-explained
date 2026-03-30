@@ -1,22 +1,32 @@
 # Technical Spec: AUTH-02 — User Login
 
-**Author:** Senior Developer (Developer Agent) + Architect review
+**Author:** Senior Developer (Developer Agent)
+**Reviewed by:** Architect (architecture compliance) + **PM/PO (acceptance criteria sign-off)**
 **Input:** [PRD](01-prd-user-auth.md) → [Architecture Doc](02-architecture-user-auth.md)
 **Story:** As a returning user, I want to log in with my email and password so I can access my dashboard.
 **Status:** Ready for Implementation
+**PM/PO Sign-off:** Approved — criteria match PRD AUTH-02, AUTH-05
 **Date:** 2026-03-29
 
 ---
 
-## Acceptance Criteria
+## Business Acceptance Criteria (from PRD — PM-owned)
 
-- [ ] User can submit email + password to `/auth/login`
+> These criteria are **defined by the Product Manager** in the [PRD](01-prd-user-auth.md). They are reproduced here for traceability. The developer does not modify these — they implement against them.
+
+- [ ] Session token issued, user redirected to dashboard within 500ms *(PRD AUTH-02)*
+- [ ] After 5 failed attempts in 15 min, user is locked out with a clear message and timeframe *(PRD AUTH-02)*
+- [ ] Deactivated user sees "Account disabled. Contact support." — not a generic error *(PRD AUTH-05)*
+
+## Technical Implementation Criteria (Developer-owned — how we meet the above)
+
+- [ ] User submits email + password to `POST /auth/login`
 - [ ] Valid credentials return an access token (JWT, 15 min TTL) and refresh token (7 day TTL)
-- [ ] Invalid credentials return `401` with generic error (no info leakage)
-- [ ] Account locked after 5 failed attempts in 15 min — returns `429`
-- [ ] Deactivated accounts return `403` with message "Account disabled. Contact support."
+- [ ] Invalid credentials return `401` with generic error (no info leakage — security requirement)
+- [ ] Rate limiting implemented via `login_attempts` table: 5 failures per 15 min per IP → `429`
+- [ ] Deactivated accounts (`is_active=false`) return `403` with PM-defined message
 - [ ] Login event logged with timestamp, IP, and user agent (no password logged)
-- [ ] p95 response time < 500ms
+- [ ] p95 response time < 500ms (per PRD success metric)
 
 ## API Contract
 
@@ -120,4 +130,4 @@ CREATE INDEX idx_login_attempts_email_time
 
 ---
 
-> **Why this matters for BMAD:** This is what the AI agent actually codes against. Every field, every status code, every edge case is defined. The Developer Agent doesn't guess what a 401 response looks like — it's right here. The UAT Tester doesn't invent test cases — they're pre-defined. And the Architect already signed off that this follows the security guardrails. **This is how you eliminate hallucinated code.**
+> **Why this matters for BMAD:** This is what the AI agent actually codes against. Every field, every status code, every edge case is defined. The Developer Agent doesn't guess what a 401 response looks like — it's right here. The UAT Tester doesn't invent test cases — they're pre-defined. The Architect signed off on security guardrails. And **the PM/PO confirmed that this spec faithfully represents the business acceptance criteria from the PRD** — the developer never grades their own homework. **This is how you eliminate hallucinated code.**

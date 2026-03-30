@@ -29,11 +29,11 @@ BMAD enforces this through a chain of three artifacts, each created by the right
 
 | # | Artifact | Who Creates It | What It Answers | Why It Exists |
 |---|---|---|---|---|
-| 1 | **PRD** (Product Requirements Document) | **Product Manager** (PM Agent) | *What* are we building and *why*? Who are the users? What does success look like? | Without it, the AI guesses at requirements. With it, the agent knows exactly what's in scope, what's out, and how to measure done. |
+| 1 | **PRD** (Product Requirements Document) | **Product Manager** (PM Agent) | *What* are we building, *why*, and *what does "done" look like?* Includes business acceptance criteria for every requirement. | Without it, the AI guesses at requirements. With it, the agent knows exactly what's in scope, what's out, and how success is measured — **by the business, not the developer.** |
 | 2 | **Architecture Doc** | **Architect** (Architect Agent) | *How* does it fit into our system? What tech stack, components, security patterns, and boundaries? | Without it, the AI makes its own architecture choices — maybe it picks MD5 when you require bcrypt, or builds a monolith when you need microservices. |
-| 3 | **Technical Spec / Story** | **Senior Developer** (Developer Agent) + Architect review | *Exactly how* is this implemented? API contracts, data models, error responses, test scenarios? | This is what the AI agent actually codes against. Every field, every status code, every edge case — defined and reviewed before a single line is written. |
+| 3 | **Technical Spec / Story** | **Senior Developer** (Developer Agent) | *Exactly how* do we implement the PM's requirements? API contracts, data models, error responses — the technical translation of business acceptance criteria. | The developer defines *how* to build it, not *what's acceptable*. Acceptance criteria trace directly back to the PRD. **PM/PO signs off** that the spec faithfully represents their requirements before implementation begins. |
 
-**The handoff is non-negotiable:** PRD feeds the Architecture Doc, Architecture Doc feeds the Technical Spec, and *only then* does the Developer Agent write code. Each artifact is reviewed at a phase gate before the next begins.
+**The handoff is non-negotiable:** PRD (with business acceptance criteria) feeds the Architecture Doc, Architecture Doc feeds the Technical Spec, PM/PO reviews the Technical Spec to confirm it represents their intent, and *only then* does the Developer Agent write code. No one grades their own homework.
 
 ### See It in Action
 
@@ -67,7 +67,7 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 |---|---|---|---|
 | **1. Analysis** | Sprint Planning / Backlog Refinement | PRD, validated user stories, personas | Product Manager + Business Analyst |
 | **2. Planning** | Architecture & Design Sessions | Architecture doc, component boundaries, tech stack decisions | Architect + Engineering Leads |
-| **3. Solutioning** | Pre-sprint technical design | Story-level technical specs with acceptance criteria, API contracts, data models | Architect + Senior Devs |
+| **3. Solutioning** | Pre-sprint technical design | Technical specs (API contracts, data models) implementing PM-defined acceptance criteria; **PM/PO sign-off required** | Senior Devs + Architect + PM/PO review |
 | **4. Implementation** | Sprint execution | Production-ready code, generated against specs with AI agents | Developers + QA |
 
 **How it fits:** Phases 1–3 front-load the thinking into **existing Scrum ceremonies** (refinement, planning, design spikes). Phase 4 is where developers use AI agents — but now those agents have the full spec context, not just a Jira title.
@@ -82,7 +82,7 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 
 | Role | BMAD Superpower |
 |---|---|
-| **Product Manager** | Defines the PRD that becomes the AI agent's "north star" — requirements are never lost in translation |
+| **Product Manager** | Defines the PRD **and owns all acceptance criteria** — the PM decides what "done" looks like, not the developer. Reviews Technical Specs before implementation to confirm intent is preserved |
 | **Architect** | Uses the **Architect Agent** persona to set technical guardrails, define component boundaries, and validate architecture *before a single line of code is written* |
 | **Engineering Lead** | Reviews structured specs instead of reviewing speculative AI output — shift-left quality |
 | **Developer** | Feeds validated specs + architecture docs into Claude CLI; gets code that respects the system design, not just the immediate prompt |

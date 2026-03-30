@@ -24,15 +24,17 @@ Users currently have no way to securely log in to the platform. Without authenti
 | **Returning User** | Fast login with "remember me" option |
 | **Admin** | Ability to disable/reset accounts |
 
-## Requirements
+## Requirements & Acceptance Criteria (PM-Owned)
 
-| ID | Requirement | Priority | Acceptance Criteria |
+> **These acceptance criteria are defined by the Product Manager and represent the business definition of "done." The development team implements against these — they do not modify or redefine them. Any Technical Spec must trace back to these criteria.**
+
+| ID | Requirement | Priority | Acceptance Criteria (Business) |
 |---|---|---|---|
-| AUTH-01 | Users can register with email + password | Must Have | Account created, verification email sent within 5s |
-| AUTH-02 | Users can log in with email + password | Must Have | Session token issued, redirected to dashboard |
-| AUTH-03 | Users can reset forgotten password | Must Have | Reset link sent, expires in 15 min |
-| AUTH-04 | OAuth login (Google, GitHub) | Should Have | One-click login, account linked if email matches |
-| AUTH-05 | Admin can deactivate accounts | Must Have | Deactivated user cannot log in, sees clear message |
+| AUTH-01 | Users can register with email + password | Must Have | Account created, verification email sent within 5s, user sees confirmation message |
+| AUTH-02 | Users can log in with email + password | Must Have | Session token issued, user redirected to dashboard within 500ms. After 5 failed attempts in 15 min, user is locked out with a clear message and timeframe. |
+| AUTH-03 | Users can reset forgotten password | Must Have | Reset link sent to email, expires in 15 min, user sees confirmation that email was sent (even if email doesn't exist — no info leakage) |
+| AUTH-04 | OAuth login (Google, GitHub) | Should Have | One-click login, account auto-linked if email matches existing account |
+| AUTH-05 | Admin can deactivate accounts | Must Have | Deactivated user cannot log in, sees message "Account disabled. Contact support." — not a generic error |
 
 ## Out of Scope
 
@@ -48,4 +50,4 @@ Users currently have no way to securely log in to the platform. Without authenti
 
 ---
 
-> **Why this matters for BMAD:** This PRD is the *first artifact the AI agent sees*. Without it, an AI asked to "build a login page" would guess at requirements. With it, the agent knows exactly what to build, what's out of scope, and how success is measured.
+> **Why this matters for BMAD:** This PRD is the *first artifact the AI agent sees*. Without it, an AI asked to "build a login page" would guess at requirements. With it, the agent knows exactly what to build, what's out of scope, and how success is measured. **Critically, the acceptance criteria here are owned by the PM — they define what "done" means from the business perspective. The Technical Spec must implement these, not replace them.**
