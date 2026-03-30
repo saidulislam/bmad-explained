@@ -80,17 +80,21 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 
 ## Role Impact: How BMAD Empowers Each Stakeholder
 
-| Role | BMAD Superpower |
-|---|---|
-| **Product Manager** | Your Epic + Stories *become* the PRD — same work, structured for AI speed. You own acceptance criteria, co-author Tech Specs in a 30-min session (replacing days of Slack clarifications), and watch implementation compress from weeks to days |
-| **Architect** | Uses the **Architect Agent** persona to set technical guardrails, define component boundaries, and validate architecture *before a single line of code is written* |
-| **Engineering Lead** | Reviews structured specs instead of reviewing speculative AI output — shift-left quality |
-| **Developer** | Feeds validated specs + architecture docs into Claude CLI; gets code that respects the system design, not just the immediate prompt |
-| **UI/UX Designer** | Design specs and component contracts are captured in the planning phase, ensuring AI-generated frontend code aligns with the design system |
-| **UAT Tester** | Acceptance criteria are baked into specs from Phase 1 — test plans write themselves; AI output is verifiable against documented expectations |
-| **Scrum Master** | The **Orchestrator Agent** mirrors the SM role — coordinating agent handoffs, managing dependencies, and enforcing workflow discipline across all phases |
+> **Important:** Every role below is a **real person on your team**. BMAD gives each person an **AI agent persona** — a specialized AI assistant that helps them do their job faster and more consistently. The human makes the decisions; the AI agent does the heavy lifting.
 
-BMAD ships with **12+ specialized agent personas** and **34+ structured workflows** covering the full lifecycle. In **Party Mode**, multiple agents collaborate in a single session — e.g., Architect + Developer + QA reviewing a design simultaneously — enabling rapid, multi-perspective feedback loops.
+| Role (Human) | Their AI Agent Persona | How It Helps |
+|---|---|---|
+| **Product Manager** | **PM Agent** | Helps draft PRDs from your Epics/Stories, structures acceptance criteria in a format AI can execute against. Your work stays the same — the output just becomes machine-readable. |
+| **Architect** | **Architect Agent** | Helps generate architecture docs, validate tech decisions, and set guardrails — *before a single line of code is written*. You make the calls; the agent documents and enforces them. |
+| **Engineering Lead** | **Orchestrator Agent** | Coordinates agent handoffs across phases, tracks dependencies, flags blockers. You review structured specs instead of speculative AI output — shift-left quality. |
+| **Developer** | **Developer Agent** | Receives validated specs + architecture docs via Claude CLI and generates code that respects your system design — not just the immediate prompt. You guide and review; the agent implements. |
+| **UI/UX Designer** | **UX Agent** | Design specs and component contracts are captured in the planning phase, ensuring AI-generated frontend code aligns with your design system. |
+| **UAT Tester** | **QA Agent** | Acceptance criteria from the PRD become test plans automatically. AI output is verifiable against documented expectations — no reverse-engineering what the code *should* do. |
+| **Scrum Master** | **Orchestrator Agent** | Mirrors your coordination role — managing agent workflow discipline, phase gates, and handoffs across the sprint. |
+
+**In short:** You're still the pilot. The AI agent is your co-pilot. BMAD is the flight plan that keeps both of you on course.
+
+BMAD ships with **12+ specialized agent personas** and **34+ structured workflows** covering the full lifecycle. In **Party Mode**, multiple AI agents collaborate in a single session — e.g., Architect Agent + Developer Agent + QA Agent stress-testing a design simultaneously — enabling rapid, multi-perspective feedback loops that would take days with humans alone.
 
 ---
 
