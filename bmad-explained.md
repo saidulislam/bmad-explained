@@ -10,13 +10,52 @@ In plain terms: it's a set of rules, templates, and AI agent personas that sit *
 
 ## The "Why": From Vibe-Coding to Spec-Driven Development
 
-Without BMAD, AI-assisted development drifts toward **"vibe-coding"** — prompting an AI agent with loose intent and hoping the output is correct. This produces:
+### The Problem
 
-- **Hallucinated implementations** — code that looks plausible but violates business rules or architecture constraints
-- **Context drift** — AI agents losing track of requirements across long sessions
-- **Untraceable decisions** — no audit trail from requirement to implementation
+Without a structured process, AI-assisted development drifts toward **"vibe-coding"** — you type a loose prompt like *"build me a login page"* and hope the AI figures out the rest. It often does produce something that *looks* right. But:
 
-**BMAD eliminates this by enforcing Spec-Driven Development.** Every AI interaction is anchored to structured artifacts — PRDs, architecture docs, technical specs, and story-level acceptance criteria — so the agent operates within validated guardrails, not vibes. BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails are defined *as code* in your repo, versioned and reviewable like any other artifact.
+- **It guessed your requirements** — picked OAuth when you needed SAML, skipped rate limiting entirely
+- **It invented an architecture** — used in-memory sessions when your team standardized on Redis
+- **It hallucinated edge cases** — returns a 500 error on invalid credentials instead of a clean 401
+- **Nobody can verify it** — there's no spec to test against, so QA is reverse-engineering intent from code
+
+This is how teams end up with AI-generated code that passes a demo but fails in production.
+
+### The Fix: Spec-Driven Development
+
+**Spec-Driven Development** means one thing: **no code gets written until a specification exists that defines what to build and how to verify it's correct.**
+
+BMAD enforces this through a chain of three artifacts, each created by the right person, each reviewed before the next begins:
+
+| # | Artifact | Who Creates It | What It Answers | Why It Exists |
+|---|---|---|---|---|
+| 1 | **PRD** (Product Requirements Document) | **Product Manager** (PM Agent) | *What* are we building and *why*? Who are the users? What does success look like? | Without it, the AI guesses at requirements. With it, the agent knows exactly what's in scope, what's out, and how to measure done. |
+| 2 | **Architecture Doc** | **Architect** (Architect Agent) | *How* does it fit into our system? What tech stack, components, security patterns, and boundaries? | Without it, the AI makes its own architecture choices — maybe it picks MD5 when you require bcrypt, or builds a monolith when you need microservices. |
+| 3 | **Technical Spec / Story** | **Senior Developer** (Developer Agent) + Architect review | *Exactly how* is this implemented? API contracts, data models, error responses, test scenarios? | This is what the AI agent actually codes against. Every field, every status code, every edge case — defined and reviewed before a single line is written. |
+
+**The handoff is non-negotiable:** PRD feeds the Architecture Doc, Architecture Doc feeds the Technical Spec, and *only then* does the Developer Agent write code. Each artifact is reviewed at a phase gate before the next begins.
+
+### See It in Action
+
+We've included **real sample artifacts** in the [`samples/`](samples/) folder so you can see exactly what these look like:
+
+- [`01-prd-user-auth.md`](samples/01-prd-user-auth.md) — A Product Manager's PRD for a user authentication system
+- [`02-architecture-user-auth.md`](samples/02-architecture-user-auth.md) — An Architect's system design with tech decisions, component boundaries, and security guardrails
+- [`03-technical-spec-user-auth.md`](samples/03-technical-spec-user-auth.md) — A developer-ready technical spec with API contracts, data models, and test scenarios
+
+Read them in order. Notice how each one builds on the last, and how by the time you reach the Technical Spec, there is **zero ambiguity** about what the AI should generate.
+
+### Why This Changes Everything
+
+BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails are defined *as code* in your repo — versioned, reviewable, and auditable like any other artifact.
+
+| Vibe-Coding | Spec-Driven (BMAD) |
+|---|---|
+| "Build a login page" | PRD defines requirements → Arch Doc sets guardrails → Tech Spec defines every detail |
+| AI guesses requirements | AI reads approved requirements |
+| AI invents architecture | AI follows reviewed architecture |
+| QA reverse-engineers intent from code | QA tests against pre-defined acceptance criteria |
+| Bugs found in production | Misalignment caught at spec review |
 
 > **The core principle:** An AI agent should never generate code that hasn't been pre-validated against a spec.
 
