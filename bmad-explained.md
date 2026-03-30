@@ -154,19 +154,38 @@ Your existing artifacts (Epics, Stories, acceptance criteria) *are* the BMAD inp
 
 ## How It Works With Our Tools
 
-BMAD officially **recommends Claude Code** (Anthropic's CLI) as its primary IDE integration. It also supports Cursor and other AI coding assistants. Setup is one command:
+### One Tool, Every Role
+
+**Everyone on the team uses the same tool — Claude Code.** The different agent personas (PM Agent, Architect Agent, Developer Agent, etc.) are just different *modes* within that tool. You don't install separate software for each role.
+
+| Role | How They Access It | What It Feels Like |
+|---|---|---|
+| **Product Manager / PO** | Claude Code desktop app, web app (claude.ai/code), or VS Code extension | Like chatting with a smart assistant that knows the BMAD templates. No terminal required. You describe your feature, it helps structure the PRD. |
+| **Architect** | Claude Code desktop app or VS Code extension | Same conversational interface, but the Architect Agent asks about tech stack, component boundaries, and security — not business requirements. |
+| **Developer** | Claude CLI in terminal or VS Code extension | Full coding workflow — reads specs, generates code, runs in your IDE. This is where the terminal shines. |
+| **UX Designer** | Claude Code desktop app or VS Code extension | Conversational — describe the flow, the agent helps structure UX specs and component contracts. |
+| **QA / UAT Tester** | Claude Code desktop app or VS Code extension | Feed it the PRD's acceptance criteria, it generates test plans and test scenarios. |
+| **Scrum Master** | Claude Code desktop app or VS Code extension | Sprint planning, status tracking, retrospectives — all conversational. |
+
+**The key point:** PMs and Architects don't need to be comfortable with a terminal. Claude Code runs as a desktop app, a web app, and as IDE extensions — pick whichever interface fits your role. The agent personas work the same way regardless of how you access them.
+
+### Setup
+
+BMAD officially **recommends Claude Code** as its primary integration. It also supports Cursor and other AI coding assistants. Setup is one command (run by a developer or engineering lead):
 
 ```bash
 npx bmad-method install
 ```
 
-Here's what that gives you:
+This installs the BMAD agent personas, workflows, and templates into your project repo. Once installed, anyone on the team can use them.
 
-- **Specs live in your repo** — PRDs, architecture docs, and technical specs are stored as markdown files alongside your code. Claude CLI reads them via `CLAUDE.md` references, so the AI agent always has the full project context — not just the current prompt.
-- **Agent personas are pre-configured** — When you activate the PM Agent or Architect Agent, Claude CLI loads a structured system prompt that constrains the AI to that role. It won't go off-script.
+### What It Gives You
+
+- **Specs live in your repo** — PRDs, architecture docs, and technical specs are stored as markdown files alongside your code. Claude Code reads them via `CLAUDE.md` references, so the AI agent always has the full project context — not just the current prompt.
+- **Agent personas are pre-configured** — When you activate the PM Agent or Architect Agent, Claude Code loads a structured system prompt that constrains the AI to that role. It won't go off-script.
 - **Phase gates catch problems early** — Before the Developer Agent writes code, the Architect Agent reviews the specs. Agents can challenge each other's outputs (called Adversarial Review) — like a built-in peer review before implementation.
 - **Large projects stay manageable** — Project context is split across files so the AI loads only what it needs for the current task, even on large codebases.
-- **Works where you work** — **VS Code** and **IntelliJ** via Claude CLI extensions. No new tools to learn.
+- **Works where you work** — **VS Code** and **IntelliJ** via Claude Code extensions. No new tools to learn.
 
 ---
 
