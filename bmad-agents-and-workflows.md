@@ -10,14 +10,14 @@ Each agent has a name, a specialization, and a defined scope. When you activate 
 
 ### Core Agents (BMad Method Module)
 
-| Agent | Persona Name | Who Uses It (Human) | What It Does | Example |
+| Agent | Persona Name | Who Uses It (Human) | What It Does | Starter Prompt Samples |
 |---|---|---|---|---|
-| **PM Agent** | John | Product Manager | Drafts PRDs, structures acceptance criteria, validates user stories against business goals | PM says: *"Help me write a PRD for our new auth system"* → Agent produces a structured PRD with requirements, personas, success metrics, and acceptance criteria |
-| **Architect Agent** | Winston | Architect / Tech Lead | Generates architecture docs, validates tech decisions, defines component boundaries and security guardrails | Architect says: *"Design the auth system architecture using our existing Postgres + Redis stack"* → Agent produces system diagram, API surface, tech decision rationale |
-| **Developer Agent** | Amelia | Developer | Implements stories against specs, generates code that respects architecture constraints, runs within validated guardrails | Dev says: *"Implement story AUTH-02 (user login)"* → Agent reads the Tech Spec + Arch Doc, generates endpoint code, data models, error handling per spec |
-| **SM Agent** | — | Scrum Master | Sprint planning, retrospectives, velocity tracking, workflow coordination | SM says: *"Plan the next sprint from our prioritized backlog"* → Agent generates sprint plan with capacity allocation and dependency mapping |
-| **UX Designer Agent** | — | UI/UX Designer | Creates UX specs, validates design system compliance, defines component contracts | Designer says: *"Create a UX spec for the login and registration flow"* → Agent produces wireframe descriptions, component hierarchy, interaction patterns |
-| **Analyst Agent** | — | Business Analyst / PM | Conducts domain research, market research, technical research, generates project context | BA says: *"Research authentication best practices and compliance requirements for SOC 2"* → Agent produces a research report with recommendations |
+| **PM Agent** | John | Product Manager | Drafts PRDs, structures acceptance criteria, validates user stories against business goals | [PM Agent prompts](prompts/pm-agent-prompts.md) — Create PRD, convert Jira Epics, strengthen acceptance criteria, scope negotiation |
+| **Architect Agent** | Winston | Architect / Tech Lead | Generates architecture docs, validates tech decisions, defines component boundaries and security guardrails | [Architect Agent prompts](prompts/architect-agent-prompts.md) — Create architecture from PRD, ADRs, review proposals, security checklists |
+| **Developer Agent** | Amelia | Developer | Implements stories against specs, generates code that respects architecture constraints, runs within validated guardrails | [Developer Agent prompts](prompts/developer-agent-prompts.md) — Implement from spec, generate tests, code review against specs, bug fixes |
+| **SM Agent** | — | Scrum Master | Sprint planning, retrospectives, velocity tracking, workflow coordination | [SM Agent prompts](prompts/sm-agent-prompts.md) — Sprint planning, mid-sprint status, retrospectives, scope changes |
+| **UX Designer Agent** | — | UI/UX Designer | Creates UX specs, validates design system compliance, defines component contracts | [UX Agent prompts](prompts/ux-agent-prompts.md) — UX spec from PRD, error states, component contracts, accessibility review |
+| **Analyst Agent** | — | Business Analyst / PM | Conducts domain research, market research, technical research, generates project context | [Analyst Agent prompts](prompts/analyst-agent-prompts.md) — Domain research, competitive analysis, tech comparisons, stakeholder prep |
 
 ### Additional Agents (Extended Modules)
 
