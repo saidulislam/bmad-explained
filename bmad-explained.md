@@ -94,7 +94,9 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 
 **In short:** You're still the pilot. The AI agent is your co-pilot. BMAD is the flight plan that keeps both of you on course.
 
-BMAD ships with **12+ specialized agent personas** and **34+ structured workflows** covering the full lifecycle. In **Party Mode**, multiple AI agents collaborate in a single session — e.g., Architect Agent + Developer Agent + QA Agent stress-testing a design simultaneously — enabling rapid, multi-perspective feedback loops that would take days with humans alone.
+BMAD ships with **12+ specialized agent personas** and **34+ structured workflows** covering the full lifecycle. For the complete list with examples, see [`bmad-agents-and-workflows.md`](bmad-agents-and-workflows.md).
+
+**Party Mode** deserves special mention: it loads multiple AI agent personas into a single conversation — like putting your whole AI team in one room. **You (a real human) drive the discussion.** You ask a question like *"Should we use WebSockets or polling?"* and the PM Agent, Architect Agent, Developer Agent, and QA Agent each respond from their perspective — agreements, disagreements, tradeoffs — in seconds instead of scheduling four separate meetings. It's not agents working autonomously; it's one person getting multi-perspective AI input in real time. See [full Party Mode explanation](bmad-agents-and-workflows.md#party-mode-how-real-people-collaborate-through-ai-agents).
 
 ---
 
