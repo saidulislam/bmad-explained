@@ -96,7 +96,7 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 
 **In short:** You're still the pilot. The AI agent is your co-pilot. BMAD is the flight plan that keeps both of you on course.
 
-BMAD ships with **12+ specialized agent personas** and **34+ structured workflows** covering the full lifecycle. For the complete list with examples, see [`bmad-agents-and-workflows.md`](bmad-agents-and-workflows.md).
+BMAD ships with **12+ specialized agent personas** and **20+ structured workflows** covering the full lifecycle. For the complete list with examples, see [`bmad-agents-and-workflows.md`](bmad-agents-and-workflows.md).
 
 **Party Mode** deserves special mention: it loads multiple AI agent personas into a single conversation — like putting your whole AI team in one room. **You (a real human) drive the discussion.** You ask a question like *"Should we use WebSockets or polling?"* and the PM Agent, Architect Agent, Developer Agent, and QA Agent each respond from their perspective — agreements, disagreements, tradeoffs — in seconds instead of scheduling four separate meetings. It's not agents working autonomously; it's one person getting multi-perspective AI input in real time. See [full Party Mode explanation](bmad-agents-and-workflows.md#party-mode-how-real-people-collaborate-through-ai-agents).
 
@@ -146,7 +146,7 @@ Here's how the synergy works:
 2. PM writes **User Stories with acceptance criteria** in a structured PRD template *(same work, better format — the AI PM Agent can even help draft it)*
 3. PM sits with Senior Dev for a **30-minute Tech Spec co-authoring session** — Dev translates business criteria into technical implementation, PM confirms intent in real-time *(this replaces days of async Slack back-and-forth)*
 4. AI agent receives PRD + Architecture Doc + Tech Spec → generates implementation
-5. **No ambiguity. No "what did you mean?" No rework. No rolled cards.**
+5. **Dramatically less ambiguity. Fewer "what did you mean?" moments. Significantly less rework. Fewer rolled cards.**
 
 ### The Math That Matters to Product
 
@@ -155,8 +155,8 @@ Here's how the synergy works:
 | Clarification loops per story | 3–5 async rounds (hours to days each) | 1 co-authoring session (30 min) |
 | "That's not what I meant" in sprint review | Common | Rare — PM confirmed intent in the Tech Spec |
 | Cards rolled to next sprint due to rework | Frequent | Minimal — acceptance criteria verified before code gen |
-| Implementation time (AI-assisted) | Fast but unpredictable — rework erases the speed | Fast *and* right the first time |
-| **Epic cycle time** | **Weeks** (coding is fast, rework is slow) | **Days** (upfront clarity eliminates rework) |
+| Implementation time (AI-assisted) | Fast but unpredictable — rework erases the speed | Fast *and* significantly more correct due to spec constraints |
+| **Epic cycle time** | **Weeks** (coding is fast, rework is slow) | **Days** (upfront clarity significantly reduces rework) |
 
 ### The Key Insight for Product
 
@@ -175,8 +175,8 @@ The PM's existing artifacts (Epics, Stories, acceptance criteria) *are* the BMAD
 | Rework discovered in code review or UAT | Misalignment caught at spec review, before code gen |
 | No audit trail from requirement to code | Full traceability: PRD → Arch Doc → Tech Spec → Implementation |
 
-**BMAD is not a replacement for Scrum. It is the missing process layer that makes AI-assisted development predictable, traceable, and production-ready.**
+**BMAD is not a replacement for Scrum. It is the missing process layer that makes AI-assisted development predictable, traceable, and significantly more likely to be production-ready.**
 
 ---
 
-*Efficiency without Chaos.*
+*Spec-driven development for predictable AI-assisted outcomes.*

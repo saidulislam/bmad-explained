@@ -219,7 +219,7 @@ Rolled: AUTH-03 (Password Reset) — blocked by SendGrid API key for 4 days
 Velocity: 13/16 points (81%)
 
 Notable events:
-- AI-generated code for AUTH-01 was merged with zero rework
+- AI-generated code for AUTH-01 was merged with minimal rework (one naming convention fix)
 - AUTH-02 needed 2 rounds of revision because the Tech Spec didn't
   cover the "account locked" error message format — PM and Dev had
   different assumptions
