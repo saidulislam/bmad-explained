@@ -43,19 +43,18 @@ We've included **real sample artifacts** in the [`samples/`](samples/) folder so
 - [`02-architecture-user-auth.md`](samples/02-architecture-user-auth.md) — An Architect's system design with tech decisions, component boundaries, and security guardrails
 - [`03-technical-spec-user-auth.md`](samples/03-technical-spec-user-auth.md) — A developer-ready technical spec with API contracts, data models, and test scenarios
 
-Read them in order. Notice how each one builds on the last, and how by the time you reach the Technical Spec, there is **zero ambiguity** about what the AI should generate.
+Read them in order. Notice how each one builds on the last, and how by the time you reach the Technical Spec, there is **very little left for the AI to guess about.**
 
-### Why This Changes Everything
+### The Before and After
 
-BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails are defined *as code* in your repo — versioned, reviewable, and auditable like any other artifact.
-
-| Vibe-Coding | Spec-Driven (BMAD) |
+| Without BMAD (Vibe-Coding) | With BMAD (Spec-Driven) |
 |---|---|
-| "Build a login page" | PRD defines requirements → Arch Doc sets guardrails → Tech Spec defines every detail |
-| AI guesses requirements | AI reads approved requirements |
-| AI invents architecture | AI follows reviewed architecture |
+| "Build a login page" → AI guesses everything | PRD defines requirements → Arch Doc sets guardrails → Tech Spec defines implementation details |
+| AI picks its own architecture | AI follows your team's reviewed architecture |
 | QA reverse-engineers intent from code | QA tests against pre-defined acceptance criteria |
-| Bugs found in production | Misalignment caught at spec review |
+| Bugs found in production or UAT | Misalignment caught at spec review, before code is written |
+
+One more thing: BMAD stores all of this — agents, workflows, guardrails, specs — **as files in your repo**. They're versioned in Git, reviewable in PRs, and auditable like any other code. Nothing lives in someone's head or a Slack thread.
 
 > **The core principle:** An AI agent should never generate code that hasn't been pre-validated against a spec.
 
@@ -65,18 +64,18 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 
 ![BMAD Method: Spec-Driven AI Development Workflow](bmad/BMAD_Method.png)
 
-| BMAD Phase | Sprint Activity | Key Output | Who Leads |
+| BMAD Phase | When It Happens | What Gets Produced | Who's Involved |
 |---|---|---|---|
-| **1. Analysis** | Sprint Planning / Backlog Refinement | PRD, validated user stories, personas | Product Manager + Business Analyst |
-| **2. Planning** | Architecture & Design Sessions | Architecture doc, component boundaries, tech stack decisions | Architect + Engineering Leads |
-| **3. Solutioning** | Pre-sprint technical design | Technical specs (API contracts, data models) co-authored with PM/PO to ensure business intent is preserved | Senior Devs + PM/PO + Architect |
-| **4. Implementation** | Sprint execution | Production-ready code, generated against specs with AI agents | Developers + QA |
+| **1. Analysis** | Before sprint — during backlog refinement or discovery | PRD with requirements, user stories, acceptance criteria | Product Manager + Business Analyst |
+| **2. Planning** | Before sprint — during design sessions | Architecture doc, component boundaries, tech stack decisions | Architect + Engineering Leads |
+| **3. Solutioning** | Before sprint — during technical design | Technical specs (API contracts, data models) co-authored with PM/PO | Senior Devs + PM/PO + Architect |
+| **4. Implementation** | During the sprint | Working code + tests, generated against the specs from Phases 1–3 | Developers + QA |
 
-**How it fits:** Phases 1–3 front-load the thinking into **existing Scrum ceremonies** (refinement, planning, design spikes). Phase 4 is where developers use AI agents — but now those agents have the full spec context, not just a Jira title.
+**How it fits your current process:** Phases 1–3 happen in your **existing Scrum ceremonies** — backlog refinement, planning, design spikes. Nothing new to schedule. Phase 4 is sprint execution, same as today — except now the AI agent has the full spec context instead of just a Jira title.
 
-**Scale-Domain-Adaptive:** BMAD automatically adjusts planning depth to project complexity — a small utility gets a lightweight spec; a distributed system gets full architecture docs and API contracts. No one-size-fits-all overhead.
+**It scales to the task:** A small bug fix or utility gets a lightweight spec (or skips straight to Quick Flow). A complex distributed system gets full architecture docs and API contracts. BMAD adjusts — you don't apply the same overhead to every task.
 
-**The Orchestrator Agent:** A central coordinator manages handoffs between phases, routes tasks to the right specialized agent, tracks dependencies, and prevents workflow bottlenecks. Think of it as your AI Scrum Master that ensures no agent goes rogue.
+**The Orchestrator Agent:** An AI coordinator that manages handoffs between phases — routes tasks to the right agent, tracks dependencies, and flags bottlenecks. Think of it as an AI assistant for your Scrum Master, keeping the workflow moving.
 
 ---
 
@@ -88,7 +87,7 @@ BMAD embraces the **Agent-as-Code paradigm**: agents, workflows, and guardrails 
 |---|---|---|
 | **Product Manager** | **PM Agent** | Helps draft PRDs from your Epics/Stories, structures acceptance criteria in a format AI can execute against. Your work stays the same — the output just becomes machine-readable. |
 | **Architect** | **Architect Agent** | Helps generate architecture docs, validate tech decisions, and set guardrails — *before a single line of code is written*. You make the calls; the agent documents and enforces them. |
-| **Engineering Lead** | **Orchestrator Agent** | Coordinates agent handoffs across phases, tracks dependencies, flags blockers. You review structured specs instead of speculative AI output — shift-left quality. |
+| **Engineering Lead** | **Orchestrator Agent** | Coordinates agent handoffs across phases, tracks dependencies, flags blockers. You review structured specs instead of speculative AI output — catching problems earlier, not in code review. |
 | **Developer** | **Developer Agent** | Receives validated specs + architecture docs via Claude CLI and generates code that respects your system design — not just the immediate prompt. You guide and review; the agent implements. |
 | **UI/UX Designer** | **UX Agent** | Design specs and component contracts are captured in the planning phase, ensuring AI-generated frontend code aligns with your design system. |
 | **UAT Tester** | **QA Agent** | Acceptance criteria from the PRD become test plans automatically. AI output is verifiable against documented expectations — no reverse-engineering what the code *should* do. |
@@ -102,31 +101,11 @@ BMAD ships with **12+ specialized agent personas** and **20+ structured workflow
 
 ---
 
-## Tooling Synergy: BMAD + Claude CLI + Opus 4.6
+## "But This Is More Work for Product" — Let's Talk About It
 
-BMAD officially **recommends Claude Code** (Anthropic's CLI) as its primary IDE integration, and also supports Cursor and other AI coding assistants. Setup is one command:
+This is the first question your product team will ask. Here's the honest answer.
 
-```bash
-npx bmad-method install
-```
-
-Here's how the synergy works:
-
-- **Context management** — BMAD artifacts (PRDs, arch docs, technical specs) are stored as markdown in-repo. Claude CLI with Opus 4.6's extended context window ingests these as project knowledge via `CLAUDE.md` and file references, keeping the agent grounded across long sessions.
-- **Agent personas** — BMAD defines 12+ specialized agent roles (Analyst, PM, Architect, Product Owner, Scrum Master, Developer, UX, QA, and more). In Claude CLI, these translate to structured system prompts and skills that constrain the agent's behavior to the current phase.
-- **Guardrails in practice** — Checklist-driven validation at each phase gate, including **Adversarial Review** where agents stress-test each other's outputs before promotion. The Architect Agent reviews specs before the Developer Agent touches code.
-- **Document sharding** — Project context is intelligently split across files so agents load only what they need, keeping within context limits even on large projects.
-- **IDE integration** — Works in **VS Code** and **IntelliJ** via Claude CLI extensions, meeting developers where they already work.
-
-> **The result:** Opus 4.6 generates code that is traceable to specs, constrained by architecture, and verifiable against acceptance criteria — not hallucinated from a one-line prompt.
-
----
-
-## "But This Is More Work for Product" — Addressing the Elephant in the Room
-
-**It's not.** Here's why.
-
-### What Product Does Today (Without BMAD)
+### What Product Does Today
 
 1. PM creates an **Epic** in Jira
 2. PM writes **User Stories** with business rules and acceptance criteria
@@ -148,39 +127,59 @@ Here's how the synergy works:
 4. AI agent receives PRD + Architecture Doc + Tech Spec → generates implementation
 5. **Dramatically less ambiguity. Fewer "what did you mean?" moments. Significantly less rework. Fewer rolled cards.**
 
-### The Math That Matters to Product
+**Steps 1 and 2 are identical.** Step 3 is new but replaces the 3–5 rounds of Slack clarifications that happen today anyway — it just moves them from scattered and async to one focused 30-minute session. Steps 4 and 5 are where the speed comes from.
 
-**Important: BMAD does not change your sprint cadence.** A 2-week sprint is still 2 weeks. What changes is the **throughput inside each sprint** and how many sprints an Epic takes to complete.
+### The Numbers
 
-| Metric | Without BMAD | With BMAD | Why |
+**BMAD does not change your sprint cadence.** A 2-week sprint is still 2 weeks. What changes is the **throughput inside each sprint** and how many sprints an Epic takes to complete.
+
+| Metric | Today | With BMAD | Why the Difference |
 |---|---|---|---|
 | Clarification loops per story | 3–5 async rounds (hours to days each) | 1 co-authoring session (30 min) | Questions answered upfront, not mid-sprint |
-| "That's not what I meant" in sprint review | Common | Rare — PM confirmed intent in the Tech Spec | PM co-authored the spec, not just reviewed it |
-| **Story cycle time** (ready → done) | 3–5 days (coding + clarification + rework) | 1–2 days (AI generates against clear spec) | The AI agent isn't guessing — it has the spec |
-| **Stories completed per sprint** | 4–6 (rework eats capacity) | 6–10 (less rework = more throughput) | Time saved on back-and-forth becomes more delivered stories |
-| Sprint rollover rate | 20–40% of stories roll to next sprint | Under 10% | Specs are validated before implementation — fewer surprises |
-| **Epic cycle time** | 3–4 sprints / 6–8 weeks (stories roll, rework, re-scope) | 1–2 sprints / 2–4 weeks (fewer rolled cards, less rework) | **This is the number product teams care about** |
+| "That's not what I meant" in sprint review | Common | Rare | PM co-authored the spec, not just reviewed it after the fact |
+| **Story cycle time** (ready → done) | 3–5 days (coding + clarification + rework) | 1–2 days (AI generates against clear spec) | The AI agent has the full spec — it isn't guessing |
+| **Stories completed per sprint** | 4–6 (rework eats capacity) | 6–10 (less rework = more throughput) | Time not spent on back-and-forth becomes more delivered stories |
+| Sprint rollover rate | 20–40% of stories roll | Under 10% | Specs are validated before implementation — fewer surprises |
+| **Epic cycle time** | 3–4 sprints / 6–8 weeks | 1–2 sprints / 2–4 weeks | **This is the number product teams care about** |
 
-**The sprint stays the same length. You just deliver more per sprint with less waste.** An Epic that used to span 3–4 sprints closes in 1–2 — not because the sprint is shorter, but because you're not losing capacity to rework and clarification loops.
+**The sprint stays the same length. You deliver more per sprint with less waste.** An Epic that used to span 3–4 sprints can close in 1–2 — not because the sprint is shorter, but because you're not losing capacity to rework and clarification loops.
 
 ### The Key Insight for Product
 
-> **BMAD doesn't add work or change your sprint cadence. It moves 30 minutes of your time from "answering Slack questions mid-sprint" to "one focused co-authoring session before sprint." The result: higher throughput per sprint, fewer rolled cards, and Epics that close in half the sprints.**
+> **BMAD doesn't add work or change your sprint cadence. It moves 30 minutes of your time from "answering Slack questions mid-sprint" to "one focused co-authoring session before sprint." The result: higher throughput per sprint, fewer rolled cards, and Epics that close in fewer sprints.**
 
-The PM's existing artifacts (Epics, Stories, acceptance criteria) *are* the BMAD inputs — just structured in a way that an AI agent can execute against without guessing. The PM Agent can even help generate the PRD from your existing Jira stories.
+Your existing artifacts (Epics, Stories, acceptance criteria) *are* the BMAD inputs — just structured in a way that an AI agent can execute against without guessing. The PM Agent can even help generate the PRD from your existing Jira stories.
+
+---
+
+## How It Works With Our Tools
+
+BMAD officially **recommends Claude Code** (Anthropic's CLI) as its primary IDE integration. It also supports Cursor and other AI coding assistants. Setup is one command:
+
+```bash
+npx bmad-method install
+```
+
+Here's what that gives you:
+
+- **Specs live in your repo** — PRDs, architecture docs, and technical specs are stored as markdown files alongside your code. Claude CLI reads them via `CLAUDE.md` references, so the AI agent always has the full project context — not just the current prompt.
+- **Agent personas are pre-configured** — When you activate the PM Agent or Architect Agent, Claude CLI loads a structured system prompt that constrains the AI to that role. It won't go off-script.
+- **Phase gates catch problems early** — Before the Developer Agent writes code, the Architect Agent reviews the specs. Agents can challenge each other's outputs (called Adversarial Review) — like a built-in peer review before implementation.
+- **Large projects stay manageable** — Project context is split across files so the AI loads only what it needs for the current task, even on large codebases.
+- **Works where you work** — **VS Code** and **IntelliJ** via Claude CLI extensions. No new tools to learn.
 
 ---
 
 ## The Bottom Line
 
-| Without BMAD | With BMAD |
-|---|---|
-| "Generate a login page" → hope for the best | Spec-validated story → architecture-constrained implementation → verifiable output |
-| AI hallucinates plausible but wrong code | AI follows documented guardrails and contracts |
-| Rework discovered in code review or UAT | Misalignment caught at spec review, before code gen |
-| No audit trail from requirement to code | Full traceability: PRD → Arch Doc → Tech Spec → Implementation |
+**BMAD is not a replacement for Scrum.** It's the missing layer between your existing Agile process and AI-assisted development.
 
-**BMAD is not a replacement for Scrum. It is the missing process layer that makes AI-assisted development predictable, traceable, and significantly more likely to be production-ready.**
+Without it, AI coding is fast but unpredictable — you get speed but lose control. With BMAD, AI coding is fast *and* constrained — every piece of generated code traces back to an approved requirement, a reviewed architecture, and testable acceptance criteria.
+
+**What you get:**
+- **Traceability** — PRD → Architecture Doc → Technical Spec → Code. Every decision is documented.
+- **Accountability** — PM owns requirements, Architect owns guardrails, Dev owns implementation. No one grades their own homework.
+- **Speed with confidence** — AI generates code faster, and the specs make sure it generates the *right* code.
 
 ---
 
